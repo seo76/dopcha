@@ -8,12 +8,12 @@ let auth = (req, res, next) =>{
     let token = req.cookies.x_auth;
 
     //토큰 복호화 및 유저 찾기
-    User.findByToken(token, (err,user)=>{
+    User.findByToken(token, (err,agnecy)=>{
         if (err) throw err;
-        if (!user) return res.json({ isAuth: false, error: true})
+        if (!agnecy) return res.json({ isAuth: false, error: true})
         
         req.token =  token;
-        req.user = user;
+        req.agnecy = agnecy;
         next();
 
     })

@@ -57,7 +57,7 @@ const AgencyForm = ({ form, onFinish, websiteOptions, onWebsiteChange }) => {
     >
       <div className="id_form">
         <Form.Item
-          name="id"
+          name="id" 
           label="아이디"
           hasFeedback
           rules={[

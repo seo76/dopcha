@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import {useDispatch} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
 import {auth} from '../_actions/user_action'
 
 export default function (SpecificComponent, option, adminRoute = null) {
@@ -10,12 +10,13 @@ export default function (SpecificComponent, option, adminRoute = null) {
     // flase : 로그인한 유저는 출입 불가능한 페이지
 
     function AuthenticationCheck(props) {
+        let agency = useSelector(state=>state.agency);
+        let user = useSelector(state=>state.user);
         const dispatch = useDispatch()
 
         useEffect(() => {
             dispatch(auth()).then(response => {
                 // console.log(response)
-
                 if(!response.payload.isAuth) { // 로그인 하지 않은 상태
                     if(option) { // option : true
                         props.history.push('/login')
@@ -34,7 +35,7 @@ export default function (SpecificComponent, option, adminRoute = null) {
         }, []) 
 
         return (
-            <SpecificComponent />
+            <SpecificComponent {...props} agency={agency} {...props} user={user}/>
         )
     }
 
