@@ -104,6 +104,7 @@ agencySchema.methods.generateToken = function(cb){
 
 agencySchema.statics.findByToken = function(token, cb){
     var agency = this;
+    var agency = this;
 
     //토큰 디코딩
     jwt.verify(token, 'secretToken', function(err, decoded){

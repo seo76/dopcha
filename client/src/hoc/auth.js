@@ -11,8 +11,9 @@ export default function (SpecificComponent, option, adminRoute = null) {
 
     function AuthenticationCheck(props) {
         let agency = useSelector(state=>state.agency);
-        let user = useSelector(state=>state.user);
-        const dispatch = useDispatch()
+        
+        //let user = useSelector(state=>state.user);
+        const dispatch = useDispatch(); 
 
         useEffect(() => {
             dispatch(auth()).then(response => {
@@ -35,8 +36,7 @@ export default function (SpecificComponent, option, adminRoute = null) {
         }, []) 
 
         return (
-            <SpecificComponent {...props} agency={agency} {...props} user={user}/>
-        )
+            <SpecificComponent {...props} agency={agency} /> )
     }
 
     return AuthenticationCheck
