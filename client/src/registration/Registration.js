@@ -108,7 +108,7 @@ const Registration = ({ history }) => {
             >
               <a
                 onClick={() => {
-                  history.push("/registration/agency");
+                  history.push("/registration/agency");//기관 회원가입 폼 불러오기
                 }}
               >
                 <h1>기관 회원가입 하기</h1>
@@ -123,7 +123,7 @@ const Registration = ({ history }) => {
             >
               <a
                 onClick={() => {
-                  history.push("/registration/individual");
+                  history.push("/registration/individual");//개인 회원가입 폼 불러오기
                 }}
               >
                 <h1>개인 회원가입 하기</h1>
