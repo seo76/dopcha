@@ -28,33 +28,43 @@ import RegistrationDone from "./registration/RegistrationDone";
 
 const App = () => {
   const callApi = async()=>{
-    axios.get("/").then((res)=>console.log(res.data.test));
-    axios.get("/homepage/Agency").then((res)=>console.log(res.data.test));
-    axios.get("/homepage/Agency_Registering").then((res)=>console.log(res.data.test));
-    axios.get("/homepage/Individual").then((res)=>console.log(res.data.test));
-    axios.get("/homepage/Individual_Detail").then((res)=>console.log(res.data.test));
-    axios.get("/login/Login").then((res)=>console.log(res.data.test));
-    axios.get("/login/Finding_id").then((res)=>console.log(res.data.test));
-    axios.get("/login/Finding_id2").then((res)=>console.log(res.data.test));
-    axios.get("/login/Finding_pw").then((res)=>console.log(res.data.test));
-    axios.get("/login/Finding_pw2").then((res)=>console.log(res.data.test));
-    axios.get("/registration/Registration").then((res)=>console.log(res.data.test));
-    axios.get("/registration/AgencyForm").then((res)=>console.log(res.data.test));
-    axios.get("/registration/IndividualForm").then((res)=>console.log(res.data.test));
-    axios.get("/registration/RegistrationDone").then((res)=>console.log(res.data.test));
+    const reponse = await fetch('/api/main');
+    const body = await reponse.json();
+    if (reponse.status !==200) throw Error(body.message);
 
-    axios.get("/homepage/Doing").then((res)=>console.log(res.data.test));
-    axios.get("/homepage/Done").then((res)=>console.log(res.data.test));
-    axios.get("/homepage/CampaignDetail").then((res)=>console.log(res.data.test));
-    
-
-
+    return body;
+    //axios.get("/api").then((res)=>console.log(res.data.test));
   };
+
+// const App = () => {
+//   const callApi = async()=>{
+//     axios.get("/").then((res)=>console.log(res.data.test));
+//     axios.get("/homepage/Agency").then((res)=>console.log(res.data.test));
+//     axios.get("/homepage/Agency_Registering").then((res)=>console.log(res.data.test));
+//     axios.get("/homepage/Individual").then((res)=>console.log(res.data.test));
+//     axios.get("/homepage/Individual_Detail").then((res)=>console.log(res.data.test));
+//     axios.get("/login/Login").then((res)=>console.log(res.data.test));
+//     axios.get("/login/Finding_id").then((res)=>console.log(res.data.test));
+//     axios.get("/login/Finding_id2").then((res)=>console.log(res.data.test));
+//     axios.get("/login/Finding_pw").then((res)=>console.log(res.data.test));
+//     axios.get("/login/Finding_pw2").then((res)=>console.log(res.data.test));
+//     axios.get("/registration/Registration").then((res)=>console.log(res.data.test));
+//     axios.get("/registration/AgencyForm").then((res)=>console.log(res.data.test));
+//     axios.get("/registration/IndividualForm").then((res)=>console.log(res.data.test));
+//     axios.get("/registration/RegistrationDone").then((res)=>console.log(res.data.test));
+
+//     axios.get("/homepage/Doing").then((res)=>console.log(res.data.test));
+//     axios.get("/homepage/Done").then((res)=>console.log(res.data.test));
+//     axios.get("/homepage/CampaignDetail").then((res)=>console.log(res.data.test));
+
+
+
+//   };
 
   useEffect(()=>{
     callApi();
   }, []);
-  
+
   return(
     <>
     <Router>

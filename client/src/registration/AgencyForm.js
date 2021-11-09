@@ -9,10 +9,13 @@ import {
 } from "antd";
 import "antd/dist/antd.css";
 import "./AgencyForm.css";
+import axios from 'axios';
 import { useDispatch } from "react-redux";
-import { registerUser } from "../_actions/user_action";
+import { registerAgency } from "../_actions/agency_actions";
 import logo from "../images/dobcha_logo.png";
 import { UploadOutlined } from "@ant-design/icons";
+import { useState } from "react";
+import { response } from "express";
 
 const AgencyForm = ({ form, onFinish, websiteOptions, onWebsiteChange }) => {
   const props = {
@@ -46,6 +49,70 @@ const AgencyForm = ({ form, onFinish, websiteOptions, onWebsiteChange }) => {
     //   },
     // ], // png db에서 가져오는 식으로 코드 바꾸기 => 임의로 사진 설정
   };
+  const dispatch = useDispatch();
+
+  const [id, setId] = useState();
+  const [password,setPassword] = useState();
+  const [agencyName,setAgencyName] = useState();
+  const [ceoName,setCeoName] = useState();
+  const [phone,setPhone] = useState();
+  const [fax,setFax] = useState();
+  const [email,setEmail] = useState();
+  const [file,setFile] = useState();
+
+  const onIdHandler = (event) =>{
+    setId(event.currentTarget.value)
+  }
+  const onPasswordHandler = (event) =>{
+    setPassword(event.currentTarget.value)
+  }
+  const onAgencyNameHandler = (event) =>{
+    setAgencyName(event.currentTarget.value)
+  }
+  const onCeoNameHandler = (event) =>{
+    setCeoName(event.currentTarget.value)
+  }
+  const onPhoneHandler = (event) =>{
+    setPhone(event.currentTarget.value)
+  }
+  const onFaxHandler = (event) =>{
+    setFax(event.currentTarget.value)
+  }
+  const onEmailHandler = (event) =>{
+    setEmail(event.currentTarget.value)
+  }
+  const onFileHandler = (event) =>{
+    setFile(event.currentTarget.value)
+  }
+
+  const onSubmitHandler = (event)=>{
+    event.preventDefault();
+
+    console.log('id',id)
+    console.log('password',password)
+
+    let body = {
+      id: id,
+      password: password,
+      agencyName: agencyName,
+      ceoName: ceoName,
+      phone: phone,
+      fax: fax,
+      email: email,
+      file: file
+    }
+
+    dispatch(registerAgency(body))
+    .then(response=>{
+      if(response.payload.success){
+        props.history.push('/registration/AgencyForm')
+        alert('가입이 성공되었습니다.')
+      }else{
+        alert('가입을 다시 시도해주십시오.')
+      }
+    })
+
+  }
 
   return (
     <Form
@@ -67,7 +134,7 @@ const AgencyForm = ({ form, onFinish, websiteOptions, onWebsiteChange }) => {
             },
           ]}
         >
-          <Input placeholder="4~12자의 영어 혹은 숫자" />
+          <Input placeholder="4~12자의 영어 혹은 숫자" value={id} onChange={onIdHandler}/>
         </Form.Item>
         <Button type="primary">중복 확인</Button>
       </div>
@@ -83,7 +150,7 @@ const AgencyForm = ({ form, onFinish, websiteOptions, onWebsiteChange }) => {
         ]}
         hasFeedback
       >
-        <Input.Password />
+        <Input.Password value={password} onChange={onPasswordHandler}/>
       </Form.Item>
 
       <Form.Item
