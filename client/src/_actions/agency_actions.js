@@ -1,5 +1,4 @@
 import axios from "axios";
-import { response } from "express";
 import {
     LOGIN_AGENCY, REGISTER_AGENCY, AUTH_AGENCY
 } from './types'
