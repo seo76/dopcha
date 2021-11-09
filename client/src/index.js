@@ -9,13 +9,13 @@ import promiseMiddleware from 'redux-promise';
 import Reducer from './reducer'
 import reduxThunk from 'redux-thunk';
 //import * as serviceWorker from './serviceWorker';
-
+    
 const createStoreWidthMiddleware = applyMiddleware(
   promiseMiddleware,
   reduxThunk
 )(createStore)
 
-ReactDOM.render(
+ReactDOM.render( 
   <React.StrictMode>
   <Provider
     store={createStoreWidthMiddleware(Reducer,
