@@ -8,7 +8,8 @@ const port = 5000
 //const config = require('./config/dev')
 const config = require('./config/key'); 
 const mongoose = require('mongoose')
-mongoose.connect('mongodb+srv://ssy:1234@cluster0.1bw63.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://ssy:1234@cluster0.1bw63.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{
+  useNewUrlParser: true, useUnifiedTopology: true})
 .then(() => console.log('MongoDB Connected...')) .catch((err)=> console.log('MongoDB error:',err))
 
 app.get('/api/hello', (req, res) => {
@@ -25,14 +26,14 @@ app.use(bodyParser.json());
 // router.get("/", (req,res)=>{
 //       res.send("hi");
 //     });
-    app.post('/api/registration',(req,res)=>{
-  //회원가입시 필요한 정보들을 클라이언트에서 가져오면 db에 넣어줌
-  const agency = new Agency(req.body)
-  agency.save((err, agencyInfo)=>{
-    if(err) return res.json({success: false, err})
-    return res.status(200).json({success: true})
-  })
-})
+    app.post('./api/registration/agency',(req,res)=>{
+      //회원가입시 필요한 정보들을 클라이언트에서 가져오면 db에 넣어
+      const agency = new Agency(req.body)
+      agency.save((err, agency)=>{
+        if(err) return res.json({success: false, err})
+        return res.status(200).json({success: true})
+      })
+    })
 
 //로그인
 const cookieParser = require('cookie-parser');

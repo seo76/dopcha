@@ -51,14 +51,14 @@ const AgencyForm = ({ form, onFinish, websiteOptions, onWebsiteChange }) => {
   };
   const dispatch = useDispatch();
 
-  const [id, setId] = useState();
-  const [password,setPassword] = useState();
-  const [agencyName,setAgencyName] = useState();
-  const [ceoName,setCeoName] = useState();
-  const [phone,setPhone] = useState();
-  const [fax,setFax] = useState();
-  const [email,setEmail] = useState();
-  const [file,setFile] = useState();
+  const [id, setId] = useState("");
+  const [password,setPassword] = useState("");
+  const [agencyName,setAgencyName] = useState("");
+  const [ceoName,setCeoName] = useState("");
+  const [phone,setPhone] = useState("");
+  const [fax,setFax] = useState("");
+  const [email,setEmail] = useState("");
+  const [file,setFile] = useState("");
 
   const onIdHandler = (event) =>{
     setId(event.currentTarget.value)
@@ -105,7 +105,7 @@ const AgencyForm = ({ form, onFinish, websiteOptions, onWebsiteChange }) => {
     dispatch(registerAgency(body))
     .then(response=>{
       if(response.payload.success){
-        props.history.push('/registration/AgencyForm')
+        props.history.push('/')
         alert('가입이 성공되었습니다.')
       }else{
         alert('가입을 다시 시도해주십시오.')
@@ -121,6 +121,7 @@ const AgencyForm = ({ form, onFinish, websiteOptions, onWebsiteChange }) => {
       name="register"
       onFinish={onFinish}
       scrollToFirstError
+      onSubmit={onSubmitHandler}
     >
       <div className="id_form">
         <Form.Item

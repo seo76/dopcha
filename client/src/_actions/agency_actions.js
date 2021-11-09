@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "axios"; 
 import {
     LOGIN_AGENCY, REGISTER_AGENCY, AUTH_AGENCY
 } from './types'
@@ -14,7 +14,7 @@ export function loginAgency(dataToSubmit){
 }
 
 export function registerAgency(dataToSubmit){
-    const request = axios.post('/api/agency/register',dataToSubmit)
+    const request = axios.post('/api/registration/agency',dataToSubmit)
         .then(response => response.data)
     return {
         type: REGISTER_AGENCY,
