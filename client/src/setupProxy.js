@@ -9,7 +9,7 @@ module.exports = app => {
         ws: true,
         router: {
           '/login': 'http://localhost:5000/login',
-          '/hompage': 'http://localhost:5000/hompage',
+          '/hompeage': 'http://localhost:5000/homepage',
           '/registration': 'http://localhost:5000/registration',
           
         }

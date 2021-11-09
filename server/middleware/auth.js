@@ -1,4 +1,5 @@
 const { User } = require("../models/User");
+const { Agency } = require("../models/Agency");
 
 let auth = (req, res, next) =>{
     //인증 처리를 하는 곳

@@ -25,7 +25,7 @@ app.use(bodyParser.json());
 // router.get("/", (req,res)=>{
 //       res.send("hi");
 //     });
-    app.post('/register_A',(req,res)=>{
+    app.post('/api/registration',(req,res)=>{
   //회원가입시 필요한 정보들을 클라이언트에서 가져오면 db에 넣어줌
   const agency = new Agency(req.body)
   agency.save((err, agencyInfo)=>{
@@ -64,7 +64,6 @@ app.post('/login',(req, res)=>{
   })
 })
 //인증
-const {auth} = require("./auth")
 
 app.get('/api/age/auth', auth ,(req, res)=>{
 

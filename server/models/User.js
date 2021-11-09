@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 //const myPlaintextPassword = 's0/\/\P4$$w0rD';
 //const someOtherPlaintextPassword = 'not_bacon';
 
-const userSchema = new mongoose.Schema({
+const userSchema = mongoose.Schema({
     id:{
         type: String,
         maxlength: 50,
