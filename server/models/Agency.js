@@ -10,7 +10,7 @@ const agencySchema = mongoose.Schema({
     id:{
         type: String,
         maxlength: 50,
-        unique: 1,
+        unique: true,
         required: true
     },
     password:{
