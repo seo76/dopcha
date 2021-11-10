@@ -26,7 +26,7 @@ app.use(bodyParser.json());
 // router.get("/", (req,res)=>{
 //       res.send("hi");
 //     });
-    app.post('/api/registration/agency',(req,res)=>{
+    app.post('/api/agency/registration',(req,res)=>{
       //회원가입시 필요한 정보들을 클라이언트에서 가져오면 db에 넣어
       const agency = new Agency(req.body)
       agency.save((err, agency)=>{

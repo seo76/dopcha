@@ -14,7 +14,7 @@ export function loginAgency(dataToSubmit){
 }
 
 export function registerAgency(dataToSubmit){
-    const request = axios.post('/api/registration/agency',dataToSubmit)
+    const request = axios.post('/api/agency/registration',dataToSubmit)
         .then(response => response.data)
     return {
         type: REGISTER_AGENCY,

@@ -47,7 +47,7 @@ const agencySchema = mongoose.Schema({
     file:{
         type: String,
         trim: true,
-        required: true
+        //required: true
     },
     role:{
         type: Number,
