@@ -16,6 +16,10 @@ import axios from "axios";
 
 const { Meta } = Card;
 const Doing = ({ history }) => {
+
+  
+
+
   return (
     <div className="main_frame">
       <div className="main_top">

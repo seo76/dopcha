@@ -13,7 +13,7 @@ import Finding_pw from './login/Finding_pw';
 import Finding_pw2 from './login/Finding_pw2';
 
 import 'antd/dist/antd.css';
-import {useEffect,useState} from 'react';
+import React ,{useEffect,useState} from 'react';
 import axios from 'axios';
 
 import Doing from "./homepage/Doing";
@@ -22,11 +22,24 @@ import CampaignDetail from "./homepage/CampaignDetail";
 import Registration from "./registration/Registration";
 import RegistrationForm from "./registration/RegistrationForm";
 import RegistrationDone from "./registration/RegistrationDone";
-
+// import index2 from "./index2"
+// import MyComponent from "./homepage/MyComponent"
 
 
 
 const App = () => {
+  // const ethereum = window.ethereum
+  // const[addr,setAddr] = useState('')
+
+  // if(ethereum){
+  //   ethereum.on('accountsChanged', function(accounts){
+  //     setAddr(accounts[0])
+  //   })
+
+  // }
+  
+
+
   const callApi = async()=>{
     const reponse = await fetch('/api/main');
     const body = await reponse.json();
@@ -66,7 +79,9 @@ const App = () => {
   }, []);
 
   return(
+  
     <>
+   
     <Router>
 
       <Route path ='/' exact component = {Main}/>
@@ -84,6 +99,8 @@ const App = () => {
       <Route path="/homepage/Doing" exact component={Doing} />
       <Route path="/homepage/Done" exact component={Done} />
       <Route path="/campaign/:type/:id" exact component={CampaignDetail} />
+      {/* <Route path="./index2" exact component={index2}/>
+      <Route path="homepage/MyComponent" exact component={MyComponent}/> */}
        {/* 기관, 개인 회원가입 모두 하나의 컴포넌트에서 처리합니다. 대신 URL의 type이라는 이름의 props로 회원가입 유형을 구분합니다. */}
        <Route path="/registration/:type" exact component={RegistrationForm} />
         {/* 위와 동일합니다 */}
@@ -91,6 +108,7 @@ const App = () => {
           path="/registration/done/:type"
           exact
           component={RegistrationDone} />
+
     </Router>
     </>
   )
