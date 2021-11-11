@@ -15,13 +15,14 @@ import { registerAgency } from "../_actions/agency_actions";
 import logo from "../images/dobcha_logo.png";
 import { UploadOutlined } from "@ant-design/icons";
 import { useState } from "react";
+import Dragger from "antd/lib/upload/Dragger";
 //import { response } from "express";
 
 
 const AgencyForm = ({ form, onFinish, websiteOptions, onWebsiteChange }) => {
   const props = {
     name: "file",
-    action: 'mongodb+srv://ssy:1234@cluster0.1bw63.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', // 파일 업로드 서버 주소 작성
+    action: '/api/agency/registration', // 파일 업로드 서버 주소 작성
     headers: {
       authorization: "authorization-text",
     },
@@ -59,7 +60,7 @@ const AgencyForm = ({ form, onFinish, websiteOptions, onWebsiteChange }) => {
   const [phone,setPhone] = useState("");
   const [fax,setFax] = useState("");
   const [email,setEmail] = useState("");
-  const [file,setFile] = useState("");
+  const [file,setFile] = useState([]);
   const [website, setWebsite] = useState("");
 
   const onIdHandler = (event) =>{
@@ -88,6 +89,20 @@ const AgencyForm = ({ form, onFinish, websiteOptions, onWebsiteChange }) => {
   }
   const onWebsiteHandler = (event) =>{
     setWebsite(event.currentTarget.value)
+  }
+  const meta = {
+    title: 'title 1',
+    contents: 'contents 1',
+  }
+  const handleUpload = () =>{
+    const formData = new FormData();
+    file.forEach(fileList => formData.append('files', fileList));
+    for (let key in meta){
+      formData.append(key, meta[key]);
+    }
+    axios.post('/api/agency/registration', formData,{
+      header:{'Content-Type':'multipart/form-data'}
+    });
   }
 
   const onSubmitHandler = (event)=>{
@@ -262,7 +277,7 @@ const AgencyForm = ({ form, onFinish, websiteOptions, onWebsiteChange }) => {
         ]}
       >
         <Upload {...props}>
-          <Button icon={<UploadOutlined />}>기관 서류 등록</Button>
+          <Button icon={<UploadOutlined onClick={handleUpload}/>}>기관 서류 등록</Button>
         </Upload>
       </Form.Item>
 
