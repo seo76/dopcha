@@ -67,64 +67,64 @@ const agencySchema = mongoose.Schema({
     }
 })
 
-// agencySchema.pre('save',function(next){
-//     var agency = this; 
-//     // 비밀번호 암호화
-//     if(agency.isModified('password')){
-//         bcrypt.genSalt(saltRounds, function(err,salt){
-//             if (err) return next(err)
-//             bcrypt.hash (agency.password, salt, function(err,hash){
-//                 if (err) return next(err)
-//                 agency.password = hash
-//                 next()
-//             })
-//         })    
-//     } else{
-//         next()
-//     }
-// })
-// //로그인 시 비밀번호 암호화 후 디비에 저장된 비밀번호와 비교        
-// agencySchema.methods.comparePassword = function(plainPassword, cb){
-//     //plainPassword 1234567 암호화된 비밀번호
-//     bcrypt.compare(plainPassword, this.password, function(err, isMatch){
-//         if(err) return cb(err);
-//             cb(null, isMatch)
-//     })
-// }
-// //로그인 시 토큰 생성
-// agencySchema.methods.generateToken = function(cb){
-//     var agency = this;
-//     var token = jwt.sign(agency._id.toHexString(), 'secretToken')
-//     //user._id + 'secretToken' = token
-//     //->
-//     //'secretToken' -> user._id
-//     agency.token = token
-//     agency.save(function(err,user){
-//         if(err) return cb(err)
-//         cb(null, user)
-//     })
-// }
+agencySchema.pre('save',function(next){
+    var agency = this; 
+    // 비밀번호 암호화
+    if(agency.isModified('password')){
+        bcrypt.genSalt(saltRounds, function(err,salt){
+            if (err) return next(err)
+            bcrypt.hash (agency.password, salt, function(err,hash){
+                if (err) return next(err)
+                agency.password = hash
+                next()
+            })
+        })    
+    } else{
+        next()
+    }
+})
+//로그인 시 비밀번호 암호화 후 디비에 저장된 비밀번호와 비교        
+agencySchema.methods.comparePassword = function(plainPassword, cb){
+    //plainPassword 1234567 암호화된 비밀번호
+    bcrypt.compare(plainPassword, this.password, function(err, isMatch){
+        if(err) return cb(err);
+            cb(null, isMatch)
+    })
+}
+//로그인 시 토큰 생성
+agencySchema.methods.generateToken = function(cb){
+    var agency = this;
+    var token = jwt.sign(agency._id.toHexString(), 'secretToken')
+    //user._id + 'secretToken' = token
+    //->
+    //'secretToken' -> user._id
+    agency.token = token
+    agency.save(function(err,agency){
+        if(err) return cb(err)
+        cb(null, agency)
+    })
+}
 
-// agencySchema.statics.findByToken = function(token, cb){
-//     var agency = this;
-//     var agency = this;
+agencySchema.statics.findByToken = function(token, cb){
+    var agency = this;
+    var agency = this;
 
-//     //토큰 디코딩
-//     jwt.verify(token, 'secretToken', function(err, decoded){
-//         //유저 아이디를 이용해 유저를 찾은 후
-//         //클라이언트의 토큰과 db의 토큰이 일치하는지 확인
+    //토큰 디코딩
+    jwt.verify(token, 'secretToken', function(err, decoded){
+        //유저 아이디를 이용해 유저를 찾은 후
+        //클라이언트의 토큰과 db의 토큰이 일치하는지 확인
 
-//         agency.findOne({"_id":decoded,"token":token}, function(err,user){
+        agency.findOne({"_id":decoded,"token":token}, function(err,agency){
 
-//             if (err) return cb(err);
-//             cb(null, user)
+            if (err) return cb(err);
+            cb(null, agency)
             
-//         })
+        })
             
-//     })
+    })
 
 
-// }
+ }
 
 const Agency = mongoose.model('Agency', agencySchema)
 
