@@ -25,6 +25,8 @@ import RegistrationDone from "./registration/RegistrationDone";
 // import index2 from "./index2"
 // import MyComponent from "./homepage/MyComponent"
 
+import Web3 from 'web3';
+
 
 
 const App = () => {
@@ -37,6 +39,7 @@ const App = () => {
   //   })
 
   // }
+ 
   
 
 
