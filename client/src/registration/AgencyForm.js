@@ -17,10 +17,11 @@ import { UploadOutlined } from "@ant-design/icons";
 import { useState } from "react";
 //import { response } from "express";
 
+
 const AgencyForm = ({ form, onFinish, websiteOptions, onWebsiteChange }) => {
   const props = {
     name: "file",
-    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76", // 파일 업로드 서버 주소 작성
+    action: 'mongodb+srv://ssy:1234@cluster0.1bw63.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', // 파일 업로드 서버 주소 작성
     headers: {
       authorization: "authorization-text",
     },
@@ -59,6 +60,7 @@ const AgencyForm = ({ form, onFinish, websiteOptions, onWebsiteChange }) => {
   const [fax,setFax] = useState("");
   const [email,setEmail] = useState("");
   const [file,setFile] = useState("");
+  const [website, setWebsite] = useState("");
 
   const onIdHandler = (event) =>{
     setId(event.currentTarget.value)
@@ -83,6 +85,9 @@ const AgencyForm = ({ form, onFinish, websiteOptions, onWebsiteChange }) => {
   }
   const onFileHandler = (event) =>{
     setFile(event.currentTarget.value)
+  }
+  const onWebsiteHandler = (event) =>{
+    setWebsite(event.currentTarget.value)
   }
 
   const onSubmitHandler = (event)=>{
@@ -189,7 +194,7 @@ const AgencyForm = ({ form, onFinish, websiteOptions, onWebsiteChange }) => {
           },
         ]}
       >
-        <Input />
+        <Input value={agencyName} onChange={onAgencyNameHandler}/>
       </Form.Item>
 
       <Form.Item
@@ -203,7 +208,7 @@ const AgencyForm = ({ form, onFinish, websiteOptions, onWebsiteChange }) => {
           },
         ]}
       >
-        <Input />
+        <Input value={ceoName} onChange={onCeoNameHandler}/>
       </Form.Item>
 
       <Form.Item
@@ -216,7 +221,7 @@ const AgencyForm = ({ form, onFinish, websiteOptions, onWebsiteChange }) => {
           },
         ]}
       >
-        <Input />
+        <Input value={phone} onChange={onPhoneHandler}/>
       </Form.Item>
 
       <Form.Item
@@ -229,7 +234,7 @@ const AgencyForm = ({ form, onFinish, websiteOptions, onWebsiteChange }) => {
           },
         ]}
       >
-        <Input />
+        <Input value={fax} onChange={onFaxHandler}/>
       </Form.Item>
 
       <Form.Item
@@ -243,7 +248,7 @@ const AgencyForm = ({ form, onFinish, websiteOptions, onWebsiteChange }) => {
           },
         ]}
       >
-        <Input />
+        <Input value={email} onChange={onEmailHandler}/>
       </Form.Item>
 
       <Form.Item
@@ -276,7 +281,7 @@ const AgencyForm = ({ form, onFinish, websiteOptions, onWebsiteChange }) => {
           onChange={onWebsiteChange}
           placeholder="website"
         >
-          <Input />
+          <Input value={website} onChange={onWebsiteHandler}/>
         </AutoComplete>
       </Form.Item>
 
