@@ -4,7 +4,7 @@ import { Divider, Input, Button, Checkbox, message } from 'antd';
 import { BankFilled ,LockFilled, PropertySafetyFilled} from '@ant-design/icons';
 import logo from '../images/dobcha_logo.png'
 import {useDispatch} from 'react-redux'
-import {useHistory} from 'react-router'
+//import {useHistory} from 'react-router'
 import {withRouter} from 'react-router-dom'
 import axios from 'axios';
 import { loginAgency } from '../_actions/agency_actions';
@@ -37,7 +37,7 @@ const LoginForm = (history) => {
         };
         dispatch(loginAgency(body)).then((response)=>{
             console.error();
-            if (response.payload.success){
+            if (response.payload.loginSuccess){
                 history.push('../homepage/Agency')
                 console.error();
             } else {

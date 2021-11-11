@@ -7,7 +7,7 @@ const port = 5000
 
 //디비 
 //const config = require('./config/dev')
-const config = require('./config/key'); 
+//const config = require('./config/key'); 
 const mongoose = require('mongoose')
 mongoose.connect('mongodb+srv://ssy:1234@cluster0.1bw63.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{
   useNewUrlParser: true, useUnifiedTopology: true})

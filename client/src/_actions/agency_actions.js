@@ -2,6 +2,7 @@ import axios from "axios";
 import {
     LOGIN_AGENCY, REGISTER_AGENCY, AUTH_AGENCY
 } from './types'
+//const {request}  = require('express');
 
 export function loginAgency(dataToSubmit){
     const request = axios.post('/api/login', dataToSubmit)
