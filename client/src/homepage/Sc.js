@@ -1,12 +1,17 @@
 
 import "./CampaignDetail.css";
+import logo from "../images/dobcha_logo.png";
 import React, {Component} from 'react';
-import { BrowserRouter as Router, Route }  from 'react-router-dom';
+import { Link,BrowserRouter as Router, Route }  from 'react-router-dom';
+import { Button} from "antd";
 import Web3 from 'web3';
 import CampaignDetail from "./CampaignDetail";
 
 
-class App extends Component {
+
+
+
+class Sc extends Component {
 
   async componentDidMount() {
     await this.initWeb3();
@@ -45,6 +50,15 @@ class App extends Component {
   render() {
     return (
       <>
+      <p style={{display:'flex', justifyContent:'center',fontSize:'15px',fontWeight:'bold',marginTop:'300px'}}
+      >Meta Mask와 연결 후 버튼을 눌러주세요.</p>
+      <Link style={{display:'flex',justifyContent:'center'}}
+      to = "/campaign/:type/:id">
+      <Button type='primary'
+      style={{display:'flex',width: '150px', height: '40px', alignItems:'center',justifyContent:'center',borderRadius:'5px'}}
+      > 기부페이지로 돌아가기 </Button>
+      </Link>
+
       <Router>
       <Route path="/campaign/:type/:id" exact component={CampaignDetail} />
       </Router>
@@ -53,4 +67,4 @@ class App extends Component {
   }
 }
 // index address challenge answer pot status answerBlockNumber
-export default App;
+export default Sc;
