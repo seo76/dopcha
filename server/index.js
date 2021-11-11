@@ -39,7 +39,7 @@ app.use(bodyParser.json());
 const cookieParser = require('cookie-parser');
 const { request } = require('express');
 app.use(cookieParser());
-app.post('/api/login',(req, res)=>{
+app.post('api/login',(req, res)=>{
   //요청된 이메일이 데이터베이스에 있는지 
   Agency.findOne({id:req.body.id},(err,agency)=>{
     if(!agency){
