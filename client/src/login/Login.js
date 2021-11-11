@@ -15,9 +15,9 @@ import AgencyForm from '../registration/AgencyForm';
 //import { response } from 'express';
 
 
-const LoginForm = (props) => {
+const LoginForm = (history) => {
     const dispatch = useDispatch();
-    const hIstory = useHistory();
+    //const history = useHistory();
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
 
@@ -29,15 +29,19 @@ const LoginForm = (props) => {
     }
 
     const onSubmitHandler = (event)=>{
+        console.error();
         event.preventDefault();
         let body = {
             id:id,
             password:password,
         };
-        dispatch(loginUser(body)).then((response)=>{
+        dispatch(loginAgency(body)).then((response)=>{
+            console.error();
             if (response.payload.success){
-                props.hIstory.push('/homepage/Agency')
+                history.push('../homepage/Agency')
+                console.error();
             } else {
+                console.error();
                 alert('Error');
                 message.error('등록되지 않은 사용자입니다.')
             }

@@ -1,7 +1,8 @@
 //서버
 const express = require('express');
+//const {request} = require('express');
 const router = express.Router();
-const app = express()
+const app = express();
 const port = 5000
 
 //디비 
@@ -37,9 +38,8 @@ app.use(bodyParser.json());
 
 //로그인
 const cookieParser = require('cookie-parser');
-const { request } = require('express');
 app.use(cookieParser());
-app.post('api/login',(req, res)=>{
+app.post('/api/login',(req, res)=>{
   //요청된 이메일이 데이터베이스에 있는지 
   Agency.findOne({id:req.body.id},(err,agency)=>{
     if(!agency){
