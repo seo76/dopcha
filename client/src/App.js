@@ -24,6 +24,7 @@ import RegistrationForm from "./registration/RegistrationForm";
 import RegistrationDone from "./registration/RegistrationDone";
 // import index2 from "./index2"
 // import MyComponent from "./homepage/MyComponent"
+import Sc from "./homepage/Sc"
 
 import Web3 from 'web3';
 
@@ -102,6 +103,8 @@ const App = () => {
       <Route path="/homepage/Doing" exact component={Doing} />
       <Route path="/homepage/Done" exact component={Done} />
       <Route path="/campaign/:type/:id" exact component={CampaignDetail} />
+      <Route path="/homepage/Sc" exact component={Sc} />
+
       {/* <Route path="./index2" exact component={index2}/>
       <Route path="homepage/MyComponent" exact component={MyComponent}/> */}
        {/* 기관, 개인 회원가입 모두 하나의 컴포넌트에서 처리합니다. 대신 URL의 type이라는 이름의 props로 회원가입 유형을 구분합니다. */}

@@ -184,7 +184,7 @@ const CampaignDetail = ({
             {type !== "closed" ? (
               <div className="campaign-detail__info__button">
 
-                <button  
+                <button onClick={()=>(history.push('/homepage/Sc'))}
                 >모금함 기부하기</button>
 
                 <label>
