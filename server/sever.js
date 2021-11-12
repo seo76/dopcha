@@ -5,9 +5,9 @@ const api = require('./index.js');
 
 app.use('/api', api);
 
-app.post('/', (req, res) => {
+app.post('/', (req, res) => { 
     console.log(req.body);
-    var data = [req.body.data];
+    var data = [req.body.data]; 
     console.log(data);
 })
 

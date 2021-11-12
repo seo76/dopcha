@@ -3,8 +3,8 @@ import axios from 'axios'
 export const getAPIHost = () => {
   // TODO: get from env
   return 'http://localhost:5000';
-}
-
+} 
+ 
 export const restApi =  axios.create({
   baseURL: getAPIHost(),
   timeout: 1000

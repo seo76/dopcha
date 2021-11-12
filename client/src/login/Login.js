@@ -15,7 +15,7 @@ import AgencyForm from '../registration/AgencyForm';
 //import { response } from 'express';
 
 
-const LoginForm = (history) => {
+const LoginForm = (props) => {
     const dispatch = useDispatch();
     //const history = useHistory();
     const [id, setId] = useState("");
@@ -33,12 +33,12 @@ const LoginForm = (history) => {
         event.preventDefault();
         let body = {
             id:id,
-            password:password,
+            password:password
         };
         dispatch(loginAgency(body)).then((response)=>{
             console.error();
             if (response.payload.loginSuccess){
-                history.push('../homepage/Agency')
+                props.history.push('../homepage/Agency')
                 console.error();
             } else {
                 console.error();
@@ -49,7 +49,7 @@ const LoginForm = (history) => {
     }
 
 
-    return(
+    return( 
         <div className ='container'>
             <div className='loginWrapper'>
                 <div className='top'>
