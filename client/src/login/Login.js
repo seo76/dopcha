@@ -60,7 +60,7 @@ const LoginForm = (props) => {
                     /></Button>
                 </div>
                 <div className='middle'>
-                    <div className='middle_left' onSubmit={onSubmitHandler}>
+                    <div className='middle_left'>
                         <div className="title"> 기관 회원</div>
                         <div className="aa">
                         <div className="aa1">{<BankFilled />}</div>
