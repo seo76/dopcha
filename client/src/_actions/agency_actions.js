@@ -1,11 +1,12 @@
 import axios from "axios"; 
+import { restApi } from "../apis";
 import {
     LOGIN_AGENCY, REGISTER_AGENCY, AUTH_AGENCY
 } from './types'
 //const {request}  = require('express');
 
 export function loginAgency(dataToSubmit){
-    const request = axios.post('/api/login', dataToSubmit)
+    const request = restApi.post('/api/login', dataToSubmit)
         .then(response => response.data)
     
     return {
@@ -15,7 +16,7 @@ export function loginAgency(dataToSubmit){
 }
 
 export function registerAgency(dataToSubmit){
-    const request = axios.post('/api/agency/registration',dataToSubmit)
+    const request = restApi.post('/api/agency/registration',dataToSubmit)
         .then(response => response.data)
     return {
         type: REGISTER_AGENCY,
@@ -24,7 +25,7 @@ export function registerAgency(dataToSubmit){
 }
 
 export function auth(){
-    const request = axios.get('./api/agency/auth')
+    const request = restApi.get('./api/agency/auth')
         .then(response => response.data)
     return {
         type: AUTH_AGENCY,

@@ -1,10 +1,8 @@
-import axios from "axios"
-import {
-    LOGIN_USER, REGISTER_USER, AUTH_USER
-} from './types'
+import { restApi } from "../apis"
+import { AUTH_USER, LOGIN_USER, REGISTER_USER } from './types'
 
 export function loginUser(dataToSubmit) {
-    const request = axios.post('/api/login', dataToSubmit)
+    const request = restApi.post('/api/login', dataToSubmit)
     .then(response => response.data)
 
     return {
@@ -14,7 +12,7 @@ export function loginUser(dataToSubmit) {
 }
 
 export function registerUser(dataToSubmit) {
-    const request = axios.post('/api/user/register', dataToSubmit)
+    const request = restApi.post('/api/user/register', dataToSubmit)
     .then(response => response.data)
 
     return {
@@ -24,7 +22,7 @@ export function registerUser(dataToSubmit) {
 }
 
 export function auth() {
-    const request = axios.get('/api/user/auth')
+    const request = restApi.get('/api/user/auth')
     .then(response => response.data)
 
     return {
