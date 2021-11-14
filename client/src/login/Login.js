@@ -20,6 +20,10 @@ const LoginForm = (props) => {
     //const history = useHistory();
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
+    //유저
+    const [idU, setIdU] = useState("");//
+    const [passwordU, setPasswordU] = useState("");
+    
 
     const onIdHandler = (event) =>{
         setId(event.currentTarget.value)
@@ -27,11 +31,18 @@ const LoginForm = (props) => {
     const onPasswordHandler = (event) =>{
         setPassword(event.currentTarget.value)
     }
+    //유저
+    const onIdUHandler = (event) =>{
+        setIdU(event.currentTarget.value)
+    }
+    const onPasswordUHandler = (event) =>{
+        setPasswordU(event.currentTarget.value)
+    }
 
     const onSubmitHandler = (event)=>{
         console.error();
         event.preventDefault();
-        let body = {
+        let body = { 
             id:id,
             password:password
         };
@@ -47,7 +58,26 @@ const LoginForm = (props) => {
             }
         });
     }
-
+    //유저
+    const onSubmitUHandler = (event)=>{
+        console.error();
+        event.preventDefault();
+        let body = { 
+            id:idU,
+            password:passwordU
+        };
+        dispatch(loginUser(body)).then((response)=>{
+            console.error();
+            if (response.payload.loginSuccess){
+                props.history.push('../homepage/Individual')
+                console.error();
+            } else {
+                console.error();
+                alert('Error');
+                message.error('등록되지 않은 사용자입니다.')
+            }
+        });
+    }
 
     return( 
         <div className ='container'>
@@ -110,7 +140,7 @@ const LoginForm = (props) => {
                         <div className="aaa1">{<BankFilled />}</div>
                         <div className="aaa2">
                         <Input placeholder="ID" 
-                        onChange={onIdHandler}
+                        onChange={onIdUHandler}
                         className='keyBox'
                         maxLength='10'
                         style={{padding: 10}}
@@ -121,7 +151,7 @@ const LoginForm = (props) => {
                         <div className="bbb1">{<LockFilled />}</div>
                         <div className="bbb2">
                         <Input placeholder="PW"
-                        onChange= {onPasswordHandler}
+                        onChange= {onPasswordUHandler}
                         />
                         </div>
                         </div>
@@ -131,7 +161,7 @@ const LoginForm = (props) => {
                             </a>
                         </div>
                         
-                        <Button type='primary'
+                        <Button type='primary' onClick={onSubmitUHandler}
                             style={{display:'flex',width: '300px', height: 'auto', justifyContent: 'center',marginTop:'10px', marginLeft: '20px'
                             , border:'none',borderRadius:'5px'}}> 로그인</Button>
 

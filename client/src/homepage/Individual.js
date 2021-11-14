@@ -58,7 +58,7 @@ const Individual=({history}) => {
           setVisible(false);
         };
 
-    const individualname = '류정하'
+    const individualname = '김유저'
     //임의로 설정했습니다. 나중에 db에서 가져와주세요~~
 
     const [isModal, setIsModal] = React.useState(false);

@@ -9,7 +9,7 @@ const userSchema = mongoose.Schema({
     id:{
         type: String,
         maxlength: 50,
-        unique: 1,
+        unique: true,
         required: true
     },
     password:{
@@ -22,17 +22,19 @@ const userSchema = mongoose.Schema({
         maxlength: 50,
         required: true
     },
-
+    phone:{
+        type: String,
+        trim: true,
+        required: true
+    },
     email:{
         type: String,
         trim: true,
         unique: 1,
         required: true
     },
-    phoneNumber:{
-        type: String,
-        trim: true,
-        required: true
+    wallet:{
+        type: String
     },
     role:{
         type: Number,

@@ -2,7 +2,7 @@ import { restApi } from "../apis"
 import { AUTH_USER, LOGIN_USER, REGISTER_USER } from './types'
 
 export function loginUser(dataToSubmit) {
-    const request = restApi.post('/api/login', dataToSubmit)
+    const request = restApi.post('/api/login/user', dataToSubmit)
     .then(response => response.data)
 
     return {
@@ -12,7 +12,7 @@ export function loginUser(dataToSubmit) {
 }
 
 export function registerUser(dataToSubmit) {
-    const request = restApi.post('/api/user/register', dataToSubmit)
+    const request = restApi.post('/api/user/registration', dataToSubmit)
     .then(response => response.data)
 
     return {

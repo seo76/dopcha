@@ -4,7 +4,8 @@ export const getAPIHost = () => {
   // TODO: get from env
   return 'http://localhost:5000';
 } 
- 
+//const agency = require('../models/agency');
+
 export const restApi =  axios.create({
   baseURL: getAPIHost(),
   timeout: 1000

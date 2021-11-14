@@ -1,16 +1,59 @@
-import { useState } from "react";
+import React,{ useState,Component } from "react";
 import { Divider, Button, Carousel, Progress } from "antd";
 import logo from "../images/dobcha_logo.png";
 import "./CampaignDetail.css";
 import axios from "axios";
 
+
+// import { MetaMaskButton } from "rimble-ui";
+// import Web3 from "web3";
+
+
+// import Modal from "react-bootstrap/Modal";
+// import MyComponent from "./MyComponent";
+
+// var detect = require("detect-browser").detect;
+// var isMobile;
+// var path = window.location.href;
+
+
+
 const CampaignDetail = ({
+
   history,
   match: {
     params: { type, id },
   },
 }) => {
   const [tab, setTab] = useState(1);
+  
+
+
+  // const connectWallet = async () => {
+  //   // 사용자의 브라우저에 Metamask가 설치되어 있는지 확인
+  //   if(window.ethereum) {
+  //    const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+  //    const chainId = await window.ethereum.request({ method: 'eth_chainId'});
+
+  //     // Check if user is connected to Mainnet
+  //   if(chainId != '0x1') {
+  //     alert("Please connect to Mainnet");
+  //   } else {
+  //     let wallet = accounts[0];
+  //     setWalletAddress(wallet);
+  //   }
+
+
+  //   } else {
+  //     // 없으면 경고창
+  //     alert("MetaMask를 설치해주세요");
+  //   }
+  // }
+
+  
+  
+
+
 
   return (
     <div className="main_frame">
@@ -140,7 +183,10 @@ const CampaignDetail = ({
 
             {type !== "closed" ? (
               <div className="campaign-detail__info__button">
-                <button>모금함 기부하기</button>
+
+                <button onClick={()=>(history.push('/homepage/Sc'))}
+                >모금함 기부하기</button>
+
                 <label>
                   <input type="checkbox" />
                   익명으로 기부하기
@@ -267,6 +313,9 @@ const CampaignDetail = ({
       </div>
     </div>
   );
+  
 };
 
 export default CampaignDetail;
+
+

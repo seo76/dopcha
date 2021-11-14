@@ -52,6 +52,9 @@ const agencySchema = mongoose.Schema({
     website:{
         type: String
     },
+    wallet:{
+        type: String
+    },
     role:{
         type: Number,
         default: 0
@@ -122,9 +125,9 @@ agencySchema.statics.findByToken = function(token, cb){
         })
             
     })
-
-
  }
+
+ 
 
 const Agency = mongoose.model('Agency', agencySchema)
 

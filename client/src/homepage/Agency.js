@@ -66,7 +66,7 @@ const Agency=({history}) => {
         };
     
 
-    const agencyname = '가나다라'
+    const agencyname = '기부단체'
     //임의로 설정했습니다. 나중에 db에서 가져와주세요~~
 
     const [isModal, setIsModal] = React.useState(false);

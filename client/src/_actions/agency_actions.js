@@ -6,7 +6,7 @@ import {
 //const {request}  = require('express');
 
 export function loginAgency(dataToSubmit){
-    const request = restApi.post('/api/login', dataToSubmit)
+    const request = restApi.post('/api/login/agency', dataToSubmit)
         .then(response => response.data)
     
     return {
@@ -24,8 +24,8 @@ export function registerAgency(dataToSubmit){
     }
 }
 
-export function auth(){
-    const request = restApi.get('./api/agency/auth')
+export function authAgency(){
+    const request = restApi.get('/api/agency/auth')
         .then(response => response.data)
     return {
         type: AUTH_AGENCY,
