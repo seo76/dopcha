@@ -53,10 +53,10 @@ class Sc extends Component {
       <p style={{display:'flex', justifyContent:'center',fontSize:'15px',fontWeight:'bold',marginTop:'300px'}}
       >Meta Mask와 연결 후 버튼을 눌러주세요.</p>
       <Link style={{display:'flex',justifyContent:'center'}}
-      to = "/campaign/:type/:id">
+      to = "/homepage/Sc2">
       <Button type='primary'
       style={{display:'flex',width: '150px', height: '40px', alignItems:'center',justifyContent:'center',borderRadius:'5px'}}
-      > 기부페이지로 돌아가기 </Button>
+      > 기부하기 </Button>
       </Link>
 
       <Router>

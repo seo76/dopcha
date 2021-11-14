@@ -25,6 +25,7 @@ import RegistrationDone from "./registration/RegistrationDone";
 // import index2 from "./index2"
 // import MyComponent from "./homepage/MyComponent"
 import Sc from "./homepage/Sc"
+import Sc2 from "./homepage/Sc2"
 
 import Web3 from 'web3';
 
@@ -104,6 +105,7 @@ const App = () => {
       <Route path="/homepage/Done" exact component={Done} />
       <Route path="/campaign/:type/:id" exact component={CampaignDetail} />
       <Route path="/homepage/Sc" exact component={Sc} />
+      <Route path="/homepage/Sc2" exact component={Sc2} />
 
       {/* <Route path="./index2" exact component={index2}/>
       <Route path="homepage/MyComponent" exact component={MyComponent}/> */}

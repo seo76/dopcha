@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
 // eslint-disable-next-line no-undef
-const Dobcha = artifacts.require("Dobcha");
+const Dobcha = artifacts.require("Dobcha_book");
 
-contract('Dobcha', function([deployer, user1, user2]){ 
+contract('Dobcha_book', function([deployer, user1, user2]){ 
     // 각각의 파라미터에는 10개의 주소중 순서대로 들어감 
 	
     let dobcha; beforeEach(async () => { 
