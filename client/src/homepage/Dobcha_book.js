@@ -1,12 +1,13 @@
 import Web3 from 'web3';
+import  './Sc2';
 
 
 const Dobcha_book=({history}) => {
 
 
 
-const web3 = require('web3');
-web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+//const web3 = require('web3');
+var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 
 var abi = [
 	{
@@ -87,6 +88,36 @@ var accounts = web3.eth.accounts;
 //     }
 //     $("#accountsBalanceTable").html(innerHtml);
 // }
+//accountsBalanceTable
+function refereshAccountsTable(){
+    var innertable = "Account";
+    for (var i=0; i<accounts.length; i++){
+        var account = accounts[i];
+        innertable = innertable + account;
+        
+    }
+    document.getElementById('accountsBalanceTable');
+  
+}
+
+function transferCoins(){
+    var from = document.getElementById('owner').value=web3.eth.accounts[0];//기부자 계정을 첫번째 계정으로 설정
+    var to = document.getElementById('Aaccount').value=web3.eth.accounts[9];//기부 단체 계정을 첫번째 계정으로 설정
+    var f_donation = document.getElementById('d_amount').value();
+    DobchaInstance.transfer(to,f_donation,{owner:from, gas:200000},
+        function(e,result){
+            if(!e)
+            refereshAccountsTable();
+            else
+                console.error(e);
+        }
+        );
+        document.ready(transferCoins());
+}
+// document.ready(transferCoins(){
+    
+// };
+
 
 
 }

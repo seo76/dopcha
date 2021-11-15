@@ -6,6 +6,7 @@ import Web3 from 'web3';
 import { BankFilled ,UserOutlined} from '@ant-design/icons';
 import ImgCrop from 'antd-img-crop';
 import './Dobcha_book.js';
+import Dobcha_book from './Dobcha_book.js';
 
 
 {/* <script src="bower_components/web3/dist/web3.min.js"></script>
@@ -14,7 +15,133 @@ import './Dobcha_book.js';
 
 
 const Sc2=({history}) => {
-    //const Web3 = require('web3');
+    // var web3 = require('web3');
+    this.state ={
+        DobchaInstance: Dobcha_book.at('0x4aec828df82E632Caef44829AE71f3244bf84611')
+    };
+
+    const Dobcha_book = window.web3.eht.contract
+    ([
+        {
+            "constant": false,
+            "inputs": [],
+            "name": "dobcha",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": true,
+            "inputs": [],
+            "name": "owner",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [],
+            "name": "donation",
+            "outputs": [],
+            "payable": true,
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "constant": true,
+            "inputs": [],
+            "name": "Aaccount",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "name": "_owner",
+                    "type": "address"
+                },
+                {
+                    "name": "_Aaccount",
+                    "type": "address"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "constructor"
+        }
+    ]
+    );
+    var from = React.createRef('owner')
+
+    function transferCoins(metaAddress){
+        const {dobcha} = this.state.DobchaInstance;
+        dobcha(
+            metaAddress,{
+            //from : window.web3.eth.accounts[0],
+            from : React.createRef('owner'),
+            to : window.web3.eth.accounts[9],
+        
+            },
+        );
+    };
+
+
+
+//var contractInstance = new web3.eth.Contract(abi, '0xe1623AAf57fCbe260F022404C730ae32aebe39F6');
+
+//var DobchaAbi = new web3.eth.Contract(abi);
+//var DobchaInstance = DobchaAbi.at("0xBE3e2e2e7C8efaB58100b896B8D13eD7c40fD6e8");
+//var accounts = web3.eth.accounts;
+
+// function transferCoins(){
+//     var from = React.createRef('owner');//.web3.eth.accounts[0];//기부자 계정을 첫번째 계정으로 설정
+//     var to = React.createRef('Aaccount');
+//     var f_donation = React.createRef('d_amount');
+//     //var to = document.getElementById('Aaccount').value=web3.eth.accounts[9];//기부 단체 계정을 첫번째 계정으로 설정
+//     //var f_donation = document.getElementById('d_amount');
+//     //const btn = document.getElementById('donation');
+//     DobchaInstance.dobcha(to, f_donation ,{owner:from, gas:200000});
+            
+// }
+
+// function refereshAccountsTable(){
+//     var innerHtml = "<tr><td>Account</td><td>Balance</td></tr>";
+
+//     for (var i=0; i < accounts.length; i++) {
+//         var account = accounts[i];
+//         var balance = DobchaInstance.coinBalance(account);
+//         innerHtml = innerHtml + "<tr><td>" + account + "</td><td>" + balance + "</td></tr>";
+//     }
+//     $("#accountsBalanceTable").html(innerHtml);
+// }
+//accountsBalanceTable
+
+// function refereshAccountsTable(){
+//     var innertable = "Account";
+//     for (var i=0; i<accounts.length; i++){
+//         var account = accounts[i];
+//         innertable = innertable + account;
+        
+//     }
+//     document.getElementById('accountsBalanceTable');
+  
+// }
+
+
 
 
 
@@ -74,7 +201,7 @@ const Sc2=({history}) => {
     
     return(
         <div className="Sc_frame">
-            <div className='main_top'>
+            <div className='Sc_top'>
                 <Button style={{ border:'none'}}
                     ><img src={logo} alt ="dobcha_logo" 
                             onClick ={( )=> {history.push('/homepage/Agency')}}
@@ -92,7 +219,7 @@ const Sc2=({history}) => {
                 }}> 마감된 기부 {/* 마감된 기부 페이지로 경로 바꾸기*/} </a>
                 </div>
 
-                <div className='main_btn'>
+                <div className='Sc_btn'>
                     <div className='agency_icon'  style={{marginTop:'12px', marginRight:'30px'}}>
                         {<BankFilled onClick={showDrawer}
                     style={{fontSize:'20px'}}/>
@@ -170,26 +297,24 @@ const Sc2=({history}) => {
             </div>
             <Divider/>
 
-            <div className="main_middle">
+            <div className="Sc_middle">
                 <div className="Sc_container">
-                    <div>
-                    <table border="0" cellpadding="0" width="200"
-                        id='accountsBalanceTable'></table>
-                    </div>
-                    <div>
+                    
+                    <div className="transferCoins">
                         <div style={{display:'flex', flexDirection:'row', marginTop:'20px'}}>
                             From:  &nbsp;
-                            <input type="text" id = "from" />
+                            <input type="text" className="owner" />
                         </div>
                         <div style={{display:'flex', flexDirection:'row',marginTop:'10px'}}>
                             To: &nbsp;
-                            <input type="text" id = "from" style={{marginLeft:'20px'}}
+                            <input type="text" className = "Aaccount" style={{marginLeft:'20px'}}
                             />
                         </div>
                         <div style={{display:'flex', flexDirection:'row', marginTop:'10px'}}>
                             금액: &nbsp;
-                            <input type="text" id = "from"  style={{marginLeft:'12px'}}/>
-                            <Button type='bold'
+                            <input type="text" className = "d_amount"  style={{marginLeft:'12px'}}/>
+
+                            <Button type='bold' className = "donation" onClick={transferCoins()}
                         style={{display:'flex',width: '100px', height: '30px', alignItems:'center',
                         justifyContent:'center', marginLeft:'15px'}}
                              > 기부하기 </Button>
@@ -210,7 +335,7 @@ const Sc2=({history}) => {
 
 
 
-            <div className="main_bottom">
+            <div className="Sc_bottom">
             <a herf = "#" style={{color:'#8c8c8c'}}>돕차 소개</a>
                     <Divider type="vertical"/>
                     <a herf = "#" style={{color:'#8c8c8c'}}>돕차 이용 약관</a>

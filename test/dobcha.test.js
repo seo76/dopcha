@@ -2,7 +2,7 @@
 // eslint-disable-next-line no-undef
 const Dobcha = artifacts.require("Dobcha_book");
 
-contract('Dobcha_book', function([deployer, user1, user2]){ 
+contract('Dobcha', function([deployer, user1, user2]){ 
     // 각각의 파라미터에는 10개의 주소중 순서대로 들어감 
 	
     let dobcha; beforeEach(async () => { 
@@ -10,15 +10,19 @@ contract('Dobcha_book', function([deployer, user1, user2]){
         dobcha = await Dobcha.new(); // 컨트랙트 배포 
     }) 
     
-    it('Basic test', async () => { 
-    	console.log('Basic test') 
-        let owner = await dobcha.owner(); 
-        let value = await dobcha.getSomeValue(); 
+    // it('Basic test', async () => { 
+    // 	console.log('Basic test') 
+    //     let owner = await dobcha.owner(); 
+    //     let value = await dobcha.getSomeValue(); 
         
-        console.log('owner : ' + owner); 
-        console.log('value : ' + value); 
-        assert.equal(value, 5) // value 값 5와 같은지 확인 
-     }) 
+    //     console.log('owner : ' + owner); 
+    //     console.log('value : ' + value); 
+    //     assert.equal(value, 5) // value 값 5와 같은지 확인 
+    //  }) 
+    it.only('getWallet should return current wallet', async()=> {
+        let wallet = await dobcha.getWallet();
+        assert.equal(wallet,0)// 처음은 wallet에 돈이 없어서 0으로 설정
+    })
 });
 
 // test 방법

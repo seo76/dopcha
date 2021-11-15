@@ -54,6 +54,7 @@
 contract Dobcha_book {
     address public owner;
     address public Aaccount;
+    uint256 private _wallet;
     //address public Daccount;
 
     constructor (address _owner, address _Aaccount) public {
@@ -69,6 +70,10 @@ contract Dobcha_book {
     //  기부된 금액은 스마트 컨트랙트 상에 보관되었음
 
     //시간 설정~
+    function getWallet() public view returns(uint256 wallet){
+        return _wallet;
+    }
+    
 
     function dobcha() public {
         require(msg.sender == owner);

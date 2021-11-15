@@ -4,24 +4,24 @@
     padding:40px;
 }
 
-.main_top{
+.Sc_top{
     display: flex;
     flex-direction: row;
     margin-bottom: 7px;
     justify-content: space-around;
 }
 
-.main_click{
+.Sc_click{
     display: flex;
     justify-content: space-around;
     
 }
-.main_btn{
+.Sc_btn{
     display: flex;
     flex-direction: row;
 }
 
-.main_middle{
+.Sc_middle{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -46,7 +46,7 @@
 
 
 
-.main_bottom{
+.Sc_bottom{
     display: flex;
     justify-content: center;
     align-content: center;
