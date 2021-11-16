@@ -9,95 +9,92 @@ import './Dobcha_book.js';
 import Dobcha_book from './Dobcha_book.js';
 
 
-{/* <script src="bower_components/web3/dist/web3.min.js"></script>
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-      <script src="./Sc3.js"></script> */}
-
 
 const Sc2=({history}) => {
     // var web3 = require('web3');
-    this.state ={
-        DobchaInstance: Dobcha_book.at('0x4aec828df82E632Caef44829AE71f3244bf84611')
-    };
+    // this.state ={
+    //     DobchaInstance: Dobcha_book.at('0x4aec828df82E632Caef44829AE71f3244bf84611')
+    // };
 
-    const Dobcha_book = window.web3.eht.contract
-    ([
-        {
-            "constant": false,
-            "inputs": [],
-            "name": "dobcha",
-            "outputs": [],
-            "payable": false,
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "constant": true,
-            "inputs": [],
-            "name": "owner",
-            "outputs": [
-                {
-                    "name": "",
-                    "type": "address"
-                }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "constant": false,
-            "inputs": [],
-            "name": "donation",
-            "outputs": [],
-            "payable": true,
-            "stateMutability": "payable",
-            "type": "function"
-        },
-        {
-            "constant": true,
-            "inputs": [],
-            "name": "Aaccount",
-            "outputs": [
-                {
-                    "name": "",
-                    "type": "address"
-                }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "name": "_owner",
-                    "type": "address"
-                },
-                {
-                    "name": "_Aaccount",
-                    "type": "address"
-                }
-            ],
-            "payable": false,
-            "stateMutability": "nonpayable",
-            "type": "constructor"
-        }
-    ]
-    );
-    var from = React.createRef('owner')
+    // const Dobcha_book = window.web3.eht.contract
+    // ([
+    //     {
+    //         "constant": false,
+    //         "inputs": [],
+    //         "name": "dobcha",
+    //         "outputs": [],
+    //         "payable": false,
+    //         "stateMutability": "nonpayable",
+    //         "type": "function"
+    //     },
+    //     {
+    //         "constant": true,
+    //         "inputs": [],
+    //         "name": "owner",
+    //         "outputs": [
+    //             {
+    //                 "name": "",
+    //                 "type": "address"
+    //             }
+    //         ],
+    //         "payable": false,
+    //         "stateMutability": "view",
+    //         "type": "function"
+    //     },
+    //     {
+    //         "constant": false,
+    //         "inputs": [],
+    //         "name": "donation",
+    //         "outputs": [],
+    //         "payable": true,
+    //         "stateMutability": "payable",
+    //         "type": "function"
+    //     },
+    //     {
+    //         "constant": true,
+    //         "inputs": [],
+    //         "name": "Aaccount",
+    //         "outputs": [
+    //             {
+    //                 "name": "",
+    //                 "type": "address"
+    //             }
+    //         ],
+    //         "payable": false,
+    //         "stateMutability": "view",
+    //         "type": "function"
+    //     },
+    //     {
+    //         "inputs": [
+    //             {
+    //                 "name": "_owner",
+    //                 "type": "address"
+    //             },
+    //             {
+    //                 "name": "_Aaccount",
+    //                 "type": "address"
+    //             }
+    //         ],
+    //         "payable": false,
+    //         "stateMutability": "nonpayable",
+    //         "type": "constructor"
+    //     }
+    // ]
+    // );
 
-    function transferCoins(metaAddress){
-        const {dobcha} = this.state.DobchaInstance;
-        dobcha(
-            metaAddress,{
-            //from : window.web3.eth.accounts[0],
-            from : React.createRef('owner'),
-            to : window.web3.eth.accounts[9],
+    // var from = React.createRef('owner')
+
+    // function transferCoins(metaAddress){
+    //     const {dobcha} = this.state.DobchaInstance;
+    //     dobcha(
+    //         metaAddress,{
+    //         //from : window.web3.eth.accounts[0],
+    //         from : React.createRef('owner'),
+    //         to : window.web3.eth.accounts[9],
         
-            },
-        );
-    };
+    //         },
+    //     );
+    // };
 
 
 
@@ -140,6 +137,104 @@ const Sc2=({history}) => {
 //     document.getElementById('accountsBalanceTable');
   
 // }
+
+var Web3 = require('web3');
+var web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
+
+var DobchaAbi = [
+    {
+        "constant": false,
+        "inputs": [],
+        "name": "dobcha",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "owner",
+        "outputs": [
+            {
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [],
+        "name": "donation",
+        "outputs": [],
+        "payable": true,
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "Aaccount",
+        "outputs": [
+            {
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "_owner",
+                "type": "address"
+            },
+            {
+                "name": "_Aaccount",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    }
+];
+
+var DobchaInstance = new web3.eth.Contract(DobchaAbi,'0xCB962e9c77806B74efC44dA8c4484483652e7927');
+var exports =  {};
+
+exports.owner = function(address){
+    return DobchaInstance.owner(address);
+}// 기부자 주소 조회
+
+exports.Agency = function(address){
+    return DobchaInstance.Aaccount(address);
+}// 기관단체 주소 조회
+
+
+
+
+exports.transferCoins= function(from,to,amount,callback){
+    
+    web3.eth.transferCoins({
+        from: from.React.createRef('owner').window.web3.eth.accounts[0],
+        to: to.React.createRef('Aaccount').window.web3.eth.accounts[9],
+        amount: React.createRef('d_amount').web3.toWei(amount,'ether'),
+        gas:100000}, function(err,hash){
+            if(err){
+                return callback(err,"");
+            }else{
+                return callback(null,hash);
+            }
+        });
+};
+
+
 
 
 
@@ -314,7 +409,7 @@ const Sc2=({history}) => {
                             금액: &nbsp;
                             <input type="text" className = "d_amount"  style={{marginLeft:'12px'}}/>
 
-                            <Button type='bold' className = "donation" onClick={transferCoins()}
+                            <Button type='bold' className = "donation" onClick="transferCoins"
                         style={{display:'flex',width: '100px', height: '30px', alignItems:'center',
                         justifyContent:'center', marginLeft:'15px'}}
                              > 기부하기 </Button>
