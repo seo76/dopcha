@@ -1,82 +1,79 @@
-// pragma solidity  >=0.4.1 <0.9.0;
-// //pragma solidity  ^0.4.21;
+// SPDX-License-Identifier: GPL-3.0
 
+pragma solidity >=0.4.0 <0.9.0;
 
-// contract Dobcha_book {
-
-//     address public owner; //기부자 계좌 주소 선언
-//     // address public D_account; //돕차 계좌 주소
-//     // address public A_account; // 기부단체 계좌 주소
-//     mapping(address => uint256) public wallet;
-
-//     event Transfer(address indexed owner, address indexed D_account, uint256 value);
-//     event Transfer2(address indexed D_account, address indexed A_account, uint256 value);
-
-  
-
-//     // constructor () public{
-//     //     owner = msg.sender;
-//     //     // D_account = msg.sender;
-//     // }
-//     modifier cost(uint _amount){
-//         require(msg.value >= _amount, "Please send at least 1 ETH.");
-//         _;
-//     }
-
-//     function transfer(address D_account, uint256 _amount) payable cost(1 ether) public {
-//         msg.sender == owner;
-//         if (wallet[msg.sender] < _amount) revert();
-//         else{
-//             wallet[msg.sender] -= _amount; //기부자 계좌는 보낸 금액만큼 차감됨
-//             wallet[D_account] += _amount; //돕차계좌는 받은 금액만큼 추가됨
-//             emit Transfer(msg.sender, D_account, _amount);//기부자가 돕차계좌에 보낸 금액이 기록됨
-//         }    
-//     }//기부자 => 돕차
-
-
-//     // 시간 설정 하기....
-
-
-//     // function transfer2(address A_account1, uint256 _amount)  public {
-//     //     msg.sender == D_account;
-//     //     if (wallet[msg.sender] < _amount) revert();
-//     //     else{
-//     //         wallet[msg.sender] -= _amount; //돕차 계좌는 보낸 금액만큼 차감됨
-//     //         wallet[A_account1] += _amount; //기부단체 계좌는 받은 금액만큼 추가됨
-//     //         emit Transfer2(msg.sender, A_account1, _amount);//돕차계좌에서 기부단체 계좌에 보낸 금액이 기록됨
-//     //     }    
-//     // }//돕차 => 기부 단체
-
-
-// }
- pragma solidity  >=0.4.4 <0.9.0;
-
-contract Dobcha_book {
-    address public owner;
-    address public dAaccount;
-    //address public Daccount;
-
-    constructor (address _owner, address _dAaccount) public {
-        owner = _owner;
-        dAaccount = _dAaccount;
-       // Daccount = _Daccount;
-    }
-
-    function donation() public payable {
-        require(msg.value > 0);
-    }//기부자가 0 ETH 보다 큰 값을 기부
+contract dobcha_book{
+    // struct Fundraising{
+    //     string donationName;//agencyadd
+    //     address dobcha;
+    //     uint currentFund;
+    //     uint targetFund; //퍼센테이지= 현재/타켓
+    // }
     
-    //  기부된 금액은 스마트 컨트랙트 상에 보관되었음
-
-    //시간 설정~
-
-    function dobcha() public {
-        require(msg.sender == owner);
-        dAaccount.transfer(address(this).balance);
-    }
-    // 돈을 보내는 사람이 기부자인지 확인
-   // 맞으면 기부 단체 주소로 전송됨
+    // //필요한 인덱스값을 이쪽으로
+    // struct Donation{
+    //     address useradd;
+    //     address agencyadd;
+    //     uint donaAmount;
+    //     uint256 startDate; //endDate=startDate+60일
+    //     uint256 currentDate;
+    //     Fundraising[] fundraising;
+    // }
+    
+    // // //enum 써서 절차로 변경할 수 있음
+    
+    // // enum DonationStatus{
+    // //     enterAmount, // 금액입력
+    // //     userToDob, // 기부자->돕차
+    // //     dobToAgnecy, // 돕차->기부단체
+    // //     agencyToUser // 돕차->사용자
+    // // }
+    
+   
+    
+    // Fundraising[] public fundraising;
+    // Donation [] public donation;
+    
+    // mapping (address => Donation[1]) public user;
+    // mapping (uint256 => Donation[3]) public amount;
+    // mapping (address => Fundraising[2]) public dobcha;
+    mapping (address => uint256) public coinBalance;
+    
+    // constructor() payable{
+    //     user = payable(msg.sender);
+    //     _amount = msg.value;
+    
+    // // function transfer(address _to, uint256 _amount) public{
+    // //     require(coinBalance[msg.sender] >= _amount);
+    // //     require(coinBalance[_to] + _amount >= coinBalance[_to]);
+    // //     coinBalance[msg.sender] -= _amount;
+    // //     coinBalance[_to] += _amount;
+        
+    //  }
+    
+    
+   
+        function transferFrom(address user, address dobcha, uint256 _amount) public payable {//returns (bool success) {
+            
+            //user.transfer(msg.sender);
+            //require(dobcha != 0x0);
+            //require(coinBalance[user] > _amount);
+            user = msg.sender;
+            _amount = msg.value;
+            coinBalance[user] -= _amount;
+            coinBalance[dobcha] += _amount;
+            //coinBalance[user][msg.sender] -= _amount;
+            //emit transfer(user, dobcha, _amount);
+            //return true;
+            
+            //dobcha.transfer(msg.value);
+        }
+        
+    
 }
+
+//  0xa8482E942C795F24705799Db1bE3f01eB56012a2
+//  0xFa8Da515bfa74c60585C7602c020e606E772E6C0
    
 
     
