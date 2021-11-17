@@ -44,11 +44,33 @@
     align-content:space-around ;
     align-items: center;
 }
+.main_list{
+    display: flex;
+    flex-direction: row-reverse;
+    align-content:space-around ;
+    align-items: center;
+}
+
+.main_list_sort{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    margin-bottom: 120px;
+    align-content:space-around ;
+}
+
+.main_sort{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-bottom: 120px;
+    align-content:space-around ;
+}
 
 
 
 .main_bottom{
-    display: flex;
+    display: block;
     justify-content: center;
     align-content: center;
 }

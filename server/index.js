@@ -25,10 +25,15 @@ const { auth } = require('./middleware/auth');
 const { User } = require("./models/User"); 
 const { Agency } = require("./models/Agency"); 
 
+//기부
+const multer = require('multer');
+const {Donate} = require("./models/Donate")
+
 //CORS
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
+
 
 //application/x-www-forn-urlencoded
 // router.get("/", (req,res)=>{
@@ -161,7 +166,71 @@ app.get('/api/users/logout', auth, (req, res) => {
 }) 
 
 
-// })
+/* 기부 관련 */
+
+//기부 글등록시 필요한 정보들을 클라이언트에서 가져오면 db에 넣어줌
+app.post('/api/donate/Agency_Registering',(req,res)=>{
+  const donate = new Donate(req.body)
+  donate.save((err, donate)=>{
+    if(err) return res.json({success: false, err})
+    return res.status(200).json({
+      success: true
+    })
+  })
+})
+
+// 기부 리스트 조회
+app.post('/api/donate/donateList', (req, res) =>{
+
+  Donate.find()
+    .populate("company_name")
+    .exec((err, donationList) => {
+      if(err) return res.status(400).json({success: false, err})
+      return res.status(200).json({success: true, donationList})
+    })
+
+})
+
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, 'upload/')
+  ,
+  filename: (req, file, cb) => cb(null, `${Date.now()}_${file.originalname}`)
+  
+})
+
+const upload = multer({ storage: storage, 
+                      limits:{fileSize: 1024*1024*5}}).single('file')
+
+
+app.post('/api/donate/upload', (req, res) => {
+  //가져온 이미지를 저장을 해주면 된다.
+  upload(req, res, err => {        
+      if (err) {
+        console.log(req.file)
+
+          return req.json({ success: false, err })
+          
+      }
+      console.log("index정보", req.file)
+      return res.json({ success: true, filePath: res.req.file.path, fileName: res.req.file.filename,
+      })
+  })
+})
+
+app.get('/api/donate/donate_by_id', (req, res) =>{
+
+    // donateId를 이용해서 donateID와 같은 상품의 정보를 가져온다
+    let donateId = req.query.id
+
+    Donate.find({ _id: donateId})
+      .populate('company_name')
+      .exec((err, donate) => {
+        if(err) return res.status(400).send(err)
+        return res.status(200).send({success: true, donate})
+      })
+})
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })

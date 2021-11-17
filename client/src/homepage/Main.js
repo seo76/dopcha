@@ -7,6 +7,7 @@ import img_banner2 from '../images/img_banner2.png';
 import img_donation from '../images/img_donation.png';
 import img_volunteer from '../images/img_volunteer.png';
 import axios from 'axios';
+import DonationCard from "./DonationCard";
 
 
 const Main=({history}) => {
@@ -47,7 +48,7 @@ const Main=({history}) => {
             <Divider/>
 
 
-
+            
             <div className='main_middle'>
                 <div className='main_banner'>
                             <Carousel autoplay>
@@ -58,29 +59,36 @@ const Main=({history}) => {
                 <img src={img_banner2} alt="img_banner2"/>{/* 경로 추가하기 누르면 해당 기부 페이지로 이동바꾸기*/}
                 </div>
                 
-            </Carousel>
+                </Carousel>
                 </div>
 
 
+                <div className='main_list_sort'>
+                    <div className='sort'>
+                        <div className='main_donation'>
+                            <Button style={{ border:'none'}}
+                                ><img src={img_donation} alt ="btn_donation" 
+                                        onClick ={( )=> {history.push('../homepage/Doing')}} /* 기부메뉴(Donation_Menu) 경로 바꾸기*/
+                                        /></Button>
+                        </div>
+                        {/** 나중에 main_donation, main_volunteer 부분 css 바꾸기!! 등록된 종류가 늘어나면...결론: 백엔드와 같이 상의 */}
 
-                <div className='main_donation'>
-                    <Button style={{ border:'none'}}
-                        ><img src={img_donation} alt ="btn_donation" 
-                                onClick ={( )=> {history.push('../homepage/Doing')}} /* 기부메뉴(Donation_Menu) 경로 바꾸기*/
-                                /></Button>
+                        <div className='main_volunteer'>
+                        <Button style={{ border:'none'}}
+                            ><img src={img_volunteer} alt ="btn_volunteer" 
+                                    onClick ={( )=> {history.push('../homepage/Volunteer')}}
+                                    /></Button>
+                        </div>
+                    </div>
+                    <div className='main_list'>
+                        <DonationCard/>
+                    </div>
                 </div>
-{/** 나중에 main_donation, main_volunteer 부분 css 바꾸기!! 등록된 종류가 늘어나면...결론: 백엔드와 같이 상의 */}
-
-                <div className='main_volunteer'>
-                <Button style={{ border:'none'}}
-                    ><img src={img_volunteer} alt ="btn_volunteer" 
-                            onClick ={( )=> {history.push('../homepage/Volunteer')}}
-                            /></Button>
-                </div>
+                
             </div>
 
-
-
+            
+            
             <div className='main_bottom'>
             <a herf = "#" style={{color:'#8c8c8c'}}>돕차 소개</a>
                     <Divider type="vertical"/>

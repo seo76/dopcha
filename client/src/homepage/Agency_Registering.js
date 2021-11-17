@@ -7,15 +7,17 @@ import ImgCrop from 'antd-img-crop';
 import Editor from './EditorComponent';
 import Editor2 from './EditorComponent2';
 import 'react-quill/dist/quill.snow.css';
-import axios from 'axios';
-
-
+import axios, { Axios } from 'axios'
+import {useDispatch} from 'react-redux'
+import { createdonate } from '../_actions/donate_action';
+import FileUpload from '../components/utils/FileUpload'
 
 const Agency_Registering=({history}) =>{
     const [desc, setDesc] = useState('');
     function onEditorChange(value) {
         setDesc(value)
     }
+
     const [desc2, setDesc2] = useState('');
     function onEditorChange2(value) {
         setDesc2(value)
@@ -28,35 +30,33 @@ const Agency_Registering=({history}) =>{
 
     function onChange(value) {
         console.log('changed', value);
+        //setTargetFundraising(value)
       }
-
+    
+    
+      const [Images, setImages] = useState([])
+      const updateImages = (newImages) => {
+        setImages(newImages)
+    }
+      
     const props = {
-        name: 'file',
-        action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-        headers: {
-          authorization: 'authorization-text',
-        },
+        action: '//jsonplaceholder.typicode.com/posts/',
+        listType: 'picture',
+        
         onChange(info) {
           if (info.file.status !== 'uploading') {
-            console.log(info.file, info.fileList);
+            console.log('업로드 내용', info.fileList);
           }
           if (info.file.status === 'done') {
             message.success(`${info.file.name} file uploaded successfully`);
           } else if (info.file.status === 'error') {
-            message.error(`${info.file.name} file upload failed.`);
+            message.error(`${info.file.name} file upload failed. 실패`);
           }
-        },
-        defaultFileList: [
-            {
-              uid: '1',
-              status: 'done',
-              response: 'Server Error 500', // custom error message to show
-              src: {logo}
-            },] // png db에서 가져오는 식으로 코드 바꾸기 => 임의로 사진 설정
-      };
+        }
+    };
 
 
-
+    // 개인정보 이미지
     const getBase64=(img, callback) =>{
         const reader = new FileReader();
         reader.addEventListener('load', () => callback(reader.result));
@@ -93,8 +93,6 @@ const Agency_Registering=({history}) =>{
             
         }
           };
-      
-
 
           const [visible, setVisible] = useState(false);
         const showDrawer = () => {
@@ -110,16 +108,71 @@ const Agency_Registering=({history}) =>{
 
     const [isModal, setIsModal] = React.useState(false);
 
+    const dispatch = useDispatch();
+
+    const [Title, setTitle] = useState("");
+    const [TargetFundraising, setTargetFundraising] = useState("")
     
+    const onTitleHandler = (event) =>{
+      setTitle(event.currentTarget.value)
+    }
+
+    const [dates, setDates] = useState([]);
+    const [hackValue, setHackValue] = useState();
+    const [value, setValue] = useState();
+    const disabledDate = current => {
+      if (!dates || dates.length === 0) {
+        return false;
+      }
+      const tooLate = dates[0] && current.diff(dates[0], 'days') > 60;
+      const tooEarly = dates[1] && dates[1].diff(current, 'days') > 60;
+      return tooEarly || tooLate;
+    };
+
+    const onOpenChange = open => {
+      if (open) {
+        setHackValue([]);
+        setDates([]);
+      } else {
+        setHackValue(undefined);
+      }
+      console.log('날짜', value)
+      console.log('anj', hackValue)
+    };
 
 
+    const onSubmitHandler = (event) =>{
+      event.preventDefault();
+
+      let body ={
+        title: Title,
+        company_name: agencyname, 
+        content: desc,
+        usage_plan: desc2,
+        target_fundraising: TargetFundraising,
+        Date: value,
+        image: Images
+      }
+
+      dispatch(createdonate(body))
+      .then(response => {
+        if(response.payload.success){
+         history.push('/homepage/Doing')
+         alert('기부내역이 정상적으로 저장되었습니다.')
+        } else{
+          alert('기부가 저장되지 않았습니다.')
+        }
+      })
+
+      
+    }
 
     return(
         <div className='AR_frame'>
             <div className="registering_top">
                 <Button style={{ border:'none'}}
                     ><img src={logo} alt ="dobcha_logo" 
-                            onClick ={( )=> {history.push('../homepage/Agency')}}
+                            onClick ={( )=> {history.push('/hompage/Agency')}}
                             /></Button>
                 <div className='main_click'>
                 
@@ -174,7 +227,7 @@ const Agency_Registering=({history}) =>{
 
                         <div style={{display:'flex', justifyContent:'center', marginTop:'20px'}}>
                         <Button  type='primary' style={{ border:'none', borderRadius:'10px'}}
-                        onClick ={( )=> {history.push('/homepage/Agency_registering')}} 
+                        onClick ={( )=> {history.push('/hompage/Agency_registering')}} 
                         >글 등록하기</Button> </div>
                     </Drawer>
 
@@ -212,6 +265,10 @@ const Agency_Registering=({history}) =>{
 
 
 
+              
+            
+
+
             <div className="registering_middle">
                 <div classname="ar_text" style={{marginLeft:'75px',fontSize:'17px',marginBottom:'5px'}}>글 등록</div>
                 <div className="table_box">
@@ -219,8 +276,9 @@ const Agency_Registering=({history}) =>{
                 <div className='table_BoxNtext' style={{alignContent:'center'}}>
                         제목
                         </div>
-                        <Input placeholder=" " 
-                        style={{width:'500px', height:'30px',marginLeft:'15px'}}
+                        <Input placeholder=" " value={Title} onChange={onTitleHandler}
+                        style={{width:'500px', height:'30px',marginLeft:'15px'}
+                        }
                         />
                 </div>
                 <div className="table_boxW">
@@ -240,15 +298,18 @@ const Agency_Registering=({history}) =>{
                         
                 </div>
                 <div className="table_boxM">
-                <div className='table_BoxUPtext' style={{alignContent:'center'}}>
+                <div className='table_BoxUPtext' styreact InputNumber={{alignContent:'center'}}>
                         목표금액
                         </div>
                         <InputNumber
-                            style={{width:'265px', height:'33px',marginLeft:'15px',marginRight:'261px'}}
-                            defaultValue={10000000}
+                            style={{width:'265px', height:'33px',marginLeft:'15px',marginRight:'261px'}}      
+                            value={TargetFundraising}
+                            defaultValue={1000000}
                             formatter={value => `₩ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                             parser={value => value.replace(/\$\s?|(,*)/g, '')}
-                            onChange={onChange}
+                            onChange={setTargetFundraising}
+                            min={0}
+                            max={100000000} 
                         />
                 </div>
                 <div className="table_boxD">
@@ -256,7 +317,13 @@ const Agency_Registering=({history}) =>{
                         모금기간
                         </div>
                         <Space size={12} style={{marginLeft:'15px',marginRight:'260px'}}>
-                        <RangePicker />
+                        <RangePicker
+                          value={hackValue || value}
+                          disabledDate={disabledDate}
+                          onCalendarChange={val => setDates(val)}
+                          onChange={val => setValue(val)}
+                          onOpenChange={onOpenChange}
+                        />
                         </Space>
                 </div>
 
@@ -264,17 +331,14 @@ const Agency_Registering=({history}) =>{
 
 
                 <div className="regist_btn">
-                <Upload {...props}>
-                    <Button style={{display:'flex',width: '120px', marginLeft:'28px',height: '30px', justifyContent: 'center'
-                    ,borderRadius:'5px', marginRight:'10px', marginTop:'20px'}} icon={<UploadOutlined style={{fontSize:"15px"
-                    }}/>}> File Upload
-                        </Button>
-                </Upload>
-          
-                <Button block 
+                <FileUpload refreshFunction={updateImages}/>
+                
+                    
+                <Button block   //onSubmit={onSubmitHandler}
                     style={{display:'flex',width: '100px', height: '30px', justifyContent: 'center'
                     ,borderRadius:'5px', marginTop:'20px'}}
-                    onClick={()=> {history.push('/homepage/Doing')}} 
+                    //onClick={()=> {history.push('/homepage/Doing')}} 
+                    onClick =  {onSubmitHandler}
                     >등록</Button> {/* 진행중인 기부로 경로 바꾸기 */}
                     </div>
 
